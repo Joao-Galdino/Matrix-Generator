@@ -1,0 +1,53 @@
+<div class="mb-6 p-6 border rounded-lg shadow-md bg-white">
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Generated Matrix</h2>
+    <div id="matrix-display" class="mb-4 overflow-x-auto">
+        <table class="border-collapse">
+            {% for row in result.matrix %}
+            <tr>
+                {% for cell in row %}
+                <td class="w-10 h-10 text-center border font-semibold
+                    {% if result.zeros > result.ones %}
+                        {% if cell == 0 %}
+                            bg-[#C6EFCE] text-[#006100]
+                        {% else %}
+                            bg-[#FFC7CE] text-[#9C0006]
+                        {% endif %}
+                    {% elif result.ones > result.zeros %}
+                        {% if cell == 1 %}
+                            bg-[#C6EFCE] text-[#006100]
+                        {% else %}
+                            bg-[#FFC7CE] text-[#9C0006]
+                        {% endif %}
+                    {% else %}
+                        bg-gray-100 text-gray-800
+                    {% endif %}">
+                    {{ cell }}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div id="matrix-stats" class="text-sm text-gray-600 bg-gray-100 p-4 rounded-lg">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center">
+                <span class="w-4 h-4 inline-block mr-2 border
+                    {% if result.zeros >= result.ones %}
+                        bg-[#C6EFCE] border-[#006100]
+                    {% else %}
+                        bg-[#FFC7CE] border-[#9C0006]
+                    {% endif %}"></span>
+                <span>Zeros: {{ result.zeros }}/{{ result.total }} ({{ result.zero_percent }}%)</span>
+            </div>
+            <div class="flex items-center">
+                <span class="w-4 h-4 inline-block mr-2 border
+                    {% if result.ones >= result.zeros %}
+                        bg-[#C6EFCE] border-[#006100]
+                    {% else %}
+                        bg-[#FFC7CE] border-[#9C0006]
+                    {% endif %}"></span>
+                <span>Ones: {{ result.ones }}/{{ result.total }} ({{ result.one_percent }}%)</span>
+            </div>
+        </div>
+    </div>
+</div>
